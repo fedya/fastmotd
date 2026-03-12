@@ -1,0 +1,28 @@
+# fastmotd configuration file
+# Install to /etc/fastmotd.toml
+
+# cert_path for SSL checking
+cert_path = "/var/lib/project/project/docker-nginx/project.org-chain.pem"
+
+# disk mount points to monitor
+# example with multiple: disk_paths = ["/", "/home", "/var"]
+disk_paths = ["/home", "/", "/home/torrents"]
+
+# sections on/off (all default to true)
+[sections]
+os_info = true
+load = true
+memory = true
+swap = true
+disk_usage = true
+cpu_temp = true
+gpu_temp = true
+disk_temp = true
+docker = true
+fail2ban = true
+ssl_cert = true
+network = true
+wifi = true
+users = true
+last_login = true
+processes = true

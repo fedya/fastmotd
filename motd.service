@@ -1,6 +1,0 @@
-[Unit]
-Description=Cool /etc/motd generator
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/motd_hello_gen
