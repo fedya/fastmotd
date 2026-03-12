@@ -26,3 +26,4 @@ wifi = true
 users = true
 last_login = true
 processes = true
+battery = true

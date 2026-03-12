@@ -204,6 +204,29 @@ func main() {
 		})
 	}
 
+	if cfg.Section("battery") {
+		bat := sysinfo.Battery()
+		if bat != nil {
+			statusColor := display.BrightGreen
+			switch bat.Status {
+			case "Discharging":
+				statusColor = display.BrightYellow
+			case "Full", "Not charging":
+				statusColor = display.BrightGreen
+			case "Charging":
+				statusColor = display.BrightCyan
+			}
+			lines = append(lines, display.InfoLine{
+				Label: "Battery",
+				Value: fmt.Sprintf("%s %s[%s]%s",
+					display.ProgressBar(bat.Ratio, display.BarWidth),
+					statusColor, bat.Status, display.Reset),
+			})
+		}
+	}
+
+
+
 	// Render
 	fmt.Print("\n")
 	fmt.Print(display.RenderLines(lines))

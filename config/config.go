@@ -35,6 +35,7 @@ func Load(path string) *Config {
 			"users":      true,
 			"last_login": true,
 			"processes":  true,
+			"battery":    true,
 		},
 	}
 
@@ -54,6 +55,7 @@ func Load(path string) *Config {
 		"os_info", "load", "memory", "swap", "disk_usage",
 		"cpu_temp", "gpu_temp", "disk_temp", "docker", "fail2ban",
 		"ssl_cert", "network", "wifi", "users", "last_login", "processes",
+		"battery",
 	}
 	for _, s := range defaults {
 		if _, ok := cfg.Sections[s]; !ok {
