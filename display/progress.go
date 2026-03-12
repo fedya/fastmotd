@@ -9,6 +9,11 @@ const BarWidth = 15
 
 // ProgressBar generates a bar like ████████░░░░░░░ 53%
 func ProgressBar(ratio float64, width int) string {
+	return ProgressBarWithColor(ratio, width, ColorByRatio(ratio))
+}
+
+// ProgressBarWithColor generates a bar with a custom color
+func ProgressBarWithColor(ratio float64, width int, color string) string {
 	if ratio < 0 {
 		ratio = 0
 	}
@@ -24,6 +29,5 @@ func ProgressBar(ratio float64, width int) string {
 	for range empty {
 		sb.WriteString("░")
 	}
-	color := ColorByRatio(ratio)
 	return fmt.Sprintf("%s%s%s %s%d%%%s", color, sb.String(), Reset, color, int(ratio*100), Reset)
 }

@@ -207,19 +207,13 @@ func main() {
 	if cfg.Section("battery") {
 		bat := sysinfo.Battery()
 		if bat != nil {
-			statusColor := display.BrightGreen
-			switch bat.Status {
-			case "Discharging":
-				statusColor = display.BrightYellow
-			case "Full", "Not charging":
-				statusColor = display.BrightGreen
-			case "Charging":
-				statusColor = display.BrightCyan
-			}
+			// Invert ratio so low battery = red (like high usage)
+			barRatio := 1.0 - bat.Ratio
+			statusColor := display.ColorByRatio(barRatio)
 			lines = append(lines, display.InfoLine{
 				Label: "Battery",
 				Value: fmt.Sprintf("%s %s[%s]%s",
-					display.ProgressBar(bat.Ratio, display.BarWidth),
+					display.ProgressBarWithColor(bat.Ratio, display.BarWidth, display.ColorByRatio(barRatio)),
 					statusColor, bat.Status, display.Reset),
 			})
 		}
